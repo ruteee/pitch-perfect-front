@@ -4,7 +4,6 @@ import './Main.css'
 export default function Main({ location: { state } }){
     console.log(state);
 
-export default function Main(){
     return(
         <div> 
             <h3> View da configuração</h3>
