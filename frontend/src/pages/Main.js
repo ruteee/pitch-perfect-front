@@ -1,24 +1,33 @@
-import React, {useEffect} from 'react'
+import React, {useCallback} from 'react'
 import './Main.css'
+// import $ from 'jquery'
 
 function Main({ location: { state } }){
 
     console.log(state);
+    const node_teste = useCallback(node =>{
+        if (node !== null){
+            node.addEventListener("load", function(){
+                console.log("loaded")
+                var iframe_el = node
+                var innerDoc = iframe_el.contentWindow.document || iframe_el.contentWindow
 
-    useEffect( () =>{
-        // this.script = document.createElement("script");
-        // this.script.src = "../src/get_event.js";
-        // this.script.async = true;
-        // this.script.type="text/jsx"
-        // this.script.onload = () => this.onScriptLoad();
-        // document.body.appendChild(this.script);
-    });
+                innerDoc.addEventListener("mouseover", e => {console.log('mouseover')})
+
+                var events = ['click', 'mouseover'] 
+                events.map(function(val, idx){
+                    return innerDoc.addEventListener(val, e => { console.log(e.target.type)})
+                });
+            });
+        }
+
+    }, [])
     return(
         <div> 
             <h3> View da configuração</h3>
             <div className='app-settings'> teste</div>
             <div className='div-iframe'>                  
-                 <iframe title = "Main iframme" src="https://sigaa.ufrn.br/sigaa/public/home.jsf">
+                 <iframe ref={node_teste} title = "Main iframme" src="http://localhost:3001/">
                      <p> Page could not be loaded</p>
                  </iframe>
             </div>
