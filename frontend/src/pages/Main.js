@@ -1,6 +1,8 @@
 import React from 'react'
 import './Main.css'
 
+export default function Main({ location: { state } }){
+    console.log(state);
 
 export default function Main(){
     return(

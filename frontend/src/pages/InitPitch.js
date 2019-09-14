@@ -8,7 +8,7 @@ const [webpage, setWebPage] = useState('');
     function handleSubmit(e){
         e.preventDefault()
         console.log(webpage)
-        history.push('/main')
+        history.push(`main`, { url_content: webpage });
     }
     return (
         <div className="init-settings">
