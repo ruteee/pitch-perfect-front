@@ -5,14 +5,12 @@ import './Main.css'
 function Main({ location: { state } }){
 
     console.log(state);
-    const node_teste = useCallback(node =>{
+    const node_iframe = useCallback(node =>{
         if (node !== null){
             node.addEventListener("load", function(){
                 console.log("loaded")
                 var iframe_el = node
                 var innerDoc = iframe_el.contentWindow.document || iframe_el.contentWindow
-
-                innerDoc.addEventListener("mouseover", e => {console.log('mouseover')})
 
                 var events = ['click', 'mouseover'] 
                 events.map(function(val, idx){
@@ -27,7 +25,7 @@ function Main({ location: { state } }){
             <h3> View da configuração</h3>
             <div className='app-settings'> teste</div>
             <div className='div-iframe'>                  
-                 <iframe ref={node_teste} title = "Main iframme" src="http://localhost:3001/">
+                 <iframe ref={node_iframe} title = "Main iframme" src="http://localhost:3001/">
                      <p> Page could not be loaded</p>
                  </iframe>
             </div>
