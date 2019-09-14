@@ -1,0 +1,33 @@
+.init-settings{
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%
+
+}
+
+.init-settings form{
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.init-settings form input{
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    height: 48px;
+    padding: 20px;
+    font-size:16px;
+    color: #666666
+}
+
+.init-settings form button{
+    margin-top: 10px;
+    border:0;
+    border-radius: 4px;
+    height: 48px;
+    font-size: 16px;
+}
