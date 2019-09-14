@@ -6,13 +6,12 @@ function Main({ location: { state } }){
     console.log(state);
 
     useEffect( () =>{
-        console.log('mount')
-        this.script = document.createElement("script");
-        this.script.src = "../src/get_event.js";
-        this.script.async = true;
-        this.script.type="text/jsx"
-        this.script.onload = () => this.onScriptLoad();
-        document.body.appendChild(this.script);
+        // this.script = document.createElement("script");
+        // this.script.src = "../src/get_event.js";
+        // this.script.async = true;
+        // this.script.type="text/jsx"
+        // this.script.onload = () => this.onScriptLoad();
+        // document.body.appendChild(this.script);
     });
     return(
         <div> 
