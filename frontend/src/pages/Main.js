@@ -5,7 +5,6 @@ import './Main.css'
 function Main({ location: { state } }){
 
     const elements = []
-    var element_treated = {}
     var flag_in = false
     
     const node_iframe = useCallback(node =>{
@@ -21,8 +20,7 @@ function Main({ location: { state } }){
                         e.preventDefault();
                         console.log(e.target.type);
                         if (e.target.type !== 'undefined')
-                            treat_element(e.target);
-                    })
+                            treat_element(e.target)                    })
                 });
             });
         }
@@ -30,6 +28,7 @@ function Main({ location: { state } }){
     }, [])
 
     function treat_element(element){
+        var element_treated = {}
         element_treated.type= element.type
         element_treated.id = element.id
 
@@ -47,16 +46,13 @@ function Main({ location: { state } }){
         for (const idx_ in elements) {
             if (elements[idx_]['id'] === element_treated.id){
                 elements[idx_] = element_treated
-                flag_in = true          
-                console.log("after",elements)      
+                flag_in = true             
             }         
         }
 
         if (!flag_in){
             elements.push(element_treated)
-        }
-        console.log(elements)
-        
+        }        
     }
     
 
