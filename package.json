@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "jquery": "^3.4.1",
-    "react-load-script": "^0.0.6"
-  }
-}

@@ -3,12 +3,12 @@ import './Main.css'
 import  api from '../services/api'
 
 
-function Main({ location: { state } , match}){
+function Main({ location: { state }}){
 
-    const elements = []
+    const step = []
     var flag_in = false
     var capturing = false
-    var pitch= []
+    var steps= []
     
     const node_iframe = useCallback(node =>{
         if (node !== null){
@@ -22,8 +22,9 @@ function Main({ location: { state } , match}){
                     return innerDoc.addEventListener(val, e => {
                         e.preventDefault();
                         console.log(e.target.type);
+                        console.log(e.type)
                         if (e.target.type != null && capturing){
-                            treat_element(e.target)        
+                            build_action(e)        
                         }
                     })
                 });
@@ -32,69 +33,68 @@ function Main({ location: { state } , match}){
 
     }, [])
 
-    async function sendPitch(id, pitch_obj){
+    async function sendPitch(pitch_obj){
         await api.post(`/pitch/`, null, {
-            headers: { pitch: match.params.id},
-            data: {
-                picth: pitch_obj}
+                name: pitch_obj.name,
+                steps: pitch_obj               
         });
 
     }
 
-    function treat_element(element){
-        var element_treated = {}
-        element_treated.type= element.type
-        element_treated.id = element.id
+    function build_action(e){
+        var action = {}
+        action.event = e.type
+        action.target = e.target.id
 
-        switch (element.type) {
+        switch (e.target.type) {
             case 'text':
-                element_treated.attr= element.value
-                break;
-            case 'submit':
-                element_treated.attr = 'click'
+                action.value= e.target.value
                 break;
             default:
                 break;
         }
         flag_in = false
-        for (const idx_ in elements) {
-            if (elements[idx_]['id'] === element_treated.id){
-                elements[idx_] = element_treated
+        for (const idx_ in step) {
+            if (step[idx_]['target'] === action.target){
+                step[idx_] = action
                 flag_in = true             
             }         
         }
 
-        if (!flag_in){
-            elements.push(element_treated)
-        }        
+        if (!flag_in)
+            step.push(action)
     }
     
-    function mount_pitch_obj(){
-        const uuidv4 = require('uuid/v4')
-        var name_picth =  document.getElementById("pitch_name").value;
-        var pitch_obj = {'id': uuidv4() , 'name': name_picth, 'actions': pitch }
-        console.log("mounted",pitch_obj)
-        console.log('id', pitch_obj.id)
-
-        // sendPitch(pitch_obj.id, pitch_obj)
+    function mount_pitch(){
+        var name=  document.getElementById("pitch_name").value;
+        var pitch = {'name': name, 'url': state['url_content'], 'actions': steps }
+        console.log("mounted",pitch)
+        console.log('id', pitch)
+        sendPitch( pitch)
     }
 
     function set_action( ){
-        console.log(elements)
-        pitch.push(elements)
+        console.log(step)
+        steps.push(step)
     }
     return(
         <div> 
-            <h3> View da configuração</h3>
-            <div className='app-settings'> 
-                <span> Iniciar modo de captura</span>
-                <label className="switch">
-                    <input onClick ={e => capturing = !capturing} type="checkbox"/>
-                    <span className="slider round"></span>
-                </label>   
-                <input id ="pitch_name" type='text' placeholder = "Digite o nome do seu pitch"/>  
-                <button  id='btn-register' className='set-button' onClick= {set_action}> Cadastrar nova ação </button>
-                <button  id='btn-end-register' className='set-button' onClick={mount_pitch_obj}> Finalizar </button>
+            <div className='app-settings'>
+
+                <div className='init'>
+                    <label className="switch">
+                        <input onClick ={e => capturing = !capturing} type="checkbox"/>
+                        <span className="slider round"></span>
+                    </label> 
+                    <span className='lbl-init' > Init record</span>
+                </div>
+
+                <div className='capt-form'>
+                    <input id ="pitch_name" type='text' placeholder = "Pitch Name"/>  
+                    <button  id='btn-register' className='set-button' onClick= {set_action}> Add step </button>
+                    <button  id='btn-end-register' className='end-pitch' onClick={mount_pitch}> End  </button>
+                </div>
+                
             </div>
             <div className='div-iframe'>                  
                  <iframe ref={node_iframe} title = "Main iframme" src={state['url_content']}>
