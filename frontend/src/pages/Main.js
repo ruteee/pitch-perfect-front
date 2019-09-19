@@ -1,13 +1,16 @@
-import React, {useCallback} from 'react'
+import React, {useCallback, useState} from 'react'
 import './Main.css'
 import  api from '../services/api'
 
 
 function Main({ location: { state }}){
 
-    const step = []
+    const [actionstate, setActionstate] = useState([]);
+    const [capturing, setCapturing] = useState(false);
+    // var capturing = false;
+
+    var actions = []
     var flag_in = false
-    var capturing = false
     var steps= []
     
     const node_iframe = useCallback(node =>{
@@ -23,7 +26,7 @@ function Main({ location: { state }}){
                         e.preventDefault();
                         console.log(e.target.type);
                         console.log(e.type)
-                        if (e.target.type != null && capturing){
+                        if (e.target.type != null){
                             build_action(e)        
                         }
                     })
@@ -34,10 +37,7 @@ function Main({ location: { state }}){
     }, [])
 
     async function sendPitch(pitch_obj){
-        await api.post(`/pitch/`, null, {
-                name: pitch_obj.name,
-                steps: pitch_obj               
-        });
+        await api.post(`/pitch/`, pitch_obj);
 
     }
 
@@ -54,46 +54,89 @@ function Main({ location: { state }}){
                 break;
         }
         flag_in = false
-        for (const idx_ in step) {
-            if (step[idx_]['target'] === action.target){
-                step[idx_] = action
+        for (const idx_ in actions) {
+            if (actions[idx_]['target'] === action.target){
+                actions[idx_] = action
                 flag_in = true             
             }         
         }
 
         if (!flag_in)
-            step.push(action)
-    }
-    
-    function mount_pitch(){
-        var name=  document.getElementById("pitch_name").value;
-        var pitch = {'name': name, 'url': state['url_content'], 'actions': steps }
-        console.log("mounted",pitch)
-        console.log('id', pitch)
-        sendPitch( pitch)
+            actions.push(action)
+
+        console.log('ac',actions)
+        // setActionstate(actions)
     }
 
-    function set_action( ){
-        console.log(step)
-        steps.push(step)
+    
+    function mount_pitch(){       
+        console.log('mounr' ,capturing)
+
+        // if (capturing){
+            var name=  document.getElementById("pitch_name").value;
+            var pitch = {'name': name, 'url': state['url_content'], 'steps': steps }
+            console.log("mounted",pitch)
+            console.log('id', pitch)
+            sendPitch( pitch)
+        // }
+     
     }
+
+    function update_steps( ){
+        console.log('uo',capturing, actions)
+        // if (capturing){
+            var trigger = document.getElementById('gatilho').value
+            steps.push({trigger, 'actions': actions})
+            console.log('up',actions)
+
+        // }
+    }
+    
+
     return(
         <div> 
             <div className='app-settings'>
-
+            <span className='lbl-init' > Init record</span>
                 <div className='init'>
                     <label className="switch">
-                        <input onClick ={e => capturing = !capturing} type="checkbox"/>
+                        {/* <input id='cap'onClick ={x=> setCapturing(true)} type="checkbox"/> */}
+                        <input id='cap' type="checkbox"/>
                         <span className="slider round"></span>
                     </label> 
-                    <span className='lbl-init' > Init record</span>
+                    <input type='text' className='gatilho' id='gatilho' placeholder='Gatilho' />
                 </div>
 
                 <div className='capt-form'>
                     <input id ="pitch_name" type='text' placeholder = "Pitch Name"/>  
-                    <button  id='btn-register' className='set-button' onClick= {set_action}> Add step </button>
+                    <button  id='btn-register' className='set-button' onClick= {update_steps}> Add step </button>
                     <button  id='btn-end-register' className='end-pitch' onClick={mount_pitch}> End  </button>
+
+                    {/* {actionstate.length > 0 ? (
+                    <div>
+                        <ul>
+                            {actionstate.map((item, i) => (
+                                <li key={i} >
+                                    <p> Action # {i}</p>
+                                    <br/>
+                                    <p>target: {item.target}</p>
+                                    <p>event: {item.event}</p>
+                                    <p>value: {item.value}</p>
+                                    <br/>
+                                </li>
+                            ))}
+                            
+                        </ul>
+                    </div>
+
+                ):(
+                    <div>
+                        <h3> Sem steps  cadastrados </h3>
+                    </div>
+                )} */}
                 </div>
+
+                
+
                 
             </div>
             <div className='div-iframe'>                  
@@ -104,5 +147,6 @@ function Main({ location: { state }}){
         </div>
         )
     }
+
 
 export default Main
