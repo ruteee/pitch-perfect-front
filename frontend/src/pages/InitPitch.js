@@ -25,11 +25,11 @@ function InitPitch({ history }){
         <div>
             <div className="init-settings">
                 <form onSubmit={ handleSubmit}>
-                    <input type='text' 
+                    <input id= "text_url" type='text' 
                         placeholder ='Escreva a url da sua aplicação' 
                         value = { webpage }  
                         onChange={ e => setWebPage(e.target.value)} />
-                    <button type='submit'> Configurar Aplicação</button>
+                    <button id="btn_send_url" type='submit'> Configurar Aplicação</button>
                 </form>
             </div>
 
