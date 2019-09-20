@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react'
 import './Main.css'
 import  api from '../services/api'
 
+import {Button, FormGroup, Input} from 'reactstrap'
+
 
 function Main({ location: { state }}){
 
@@ -93,18 +95,18 @@ function Main({ location: { state }}){
             <span className='lbl-init' > Init record</span>
                 <div className='init'>
                     <label className="switch">
-                        <input id='cap' type="checkbox" onClick= { e=> setCapturing(!capturing) }/>
+                        <Input id='cap' type="checkbox" onClick= { e=> setCapturing(!capturing) }/>
                         <span className="slider round"></span>
                     </label> 
-                    <input type='text' className='gatilho' id='gatilho' placeholder='Gatilho' />
+                    <Input type='text' className='gatilho' size='sm' id='gatilho' placeholder='Gatilho' />
                 </div>
 
-                <div className='capt-form'>
-                    <input id ="pitch_name" type='text' placeholder = "Pitch Name" />  
-                    <button  id='btn-register' className='set-button' onClick= {update_steps} > Add step </button>
-                    <button  id='btn-end-register' className='end-pitch' onClick={mount_pitch} > End  </button>
+                <FormGroup className='capt-form '>
+                    <Input id ="pitch_name" type='text' placeholder = "Pitch Name" />  
+                    <Button variant ="danger"  id='btn-register' className='set-button btn btn-primary' onClick= {update_steps} > Add step </Button>
+                    <Button variant="danger" id='btn-end-register' className='end-pitch' onClick={mount_pitch} > End  </Button>
 
-                    {actionstate.length > 0 ? (
+                    {/* {actionstate.length > 0 ? (
                     <div>
                         <ul>
                             {actionstate.map((item, i) => (
@@ -125,8 +127,8 @@ function Main({ location: { state }}){
                     <div>
                         <h3> Sem steps  cadastrados </h3>
                     </div>
-                )}
-                </div>
+                )} */}
+                </FormGroup>
   
             </div>
             <div className='div-iframe'>                  
