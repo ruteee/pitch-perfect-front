@@ -165,7 +165,7 @@ function InitPitch({ history }){
                                         <DesktopMacIcon/>
                                     </ListItemIcon>
                                     <ListItemText key={ pitch._id } onClick={ () => history.push(`present/${pitch._id}`) }>
-                                        <p> Nome:  { pitch.name } </p>
+                                        <p> Name:  { pitch.name } </p>
                                         <p> URL: { pitch.url }</p>
                                     
                                     </ListItemText>
@@ -176,7 +176,7 @@ function InitPitch({ history }){
                         </List>
                     </div>
                 ) : (
-                    <div className="empty">Não existem pitchies cadastrados :(</div>
+                    <div className="empty">There are no pitches :(</div>
                     )}
             <Divider />
         </Drawer>
@@ -195,7 +195,7 @@ function InitPitch({ history }){
                         variant='outlined'  
                         margin="normal"  
                         className={classes.textField}/>
-                    <Button variant ="contained"  className={classes.Button} id="btn_send_url" onClick={handleSubmit}> Configurar Aplicação</Button>
+                    <Button variant ="contained"  className={classes.Button} id="btn_send_url" onClick={handleSubmit}> Set apllication</Button>
                 </FormGroup>
             </div>
             

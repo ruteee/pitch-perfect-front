@@ -1,11 +1,43 @@
 import React, { useState, useEffect } from 'react';
 
+import {Button, TextField, FormGroup,AppBar,Toolbar, Drawer, Typography, IconButton, Divider, List, ListItemText, ListItem, FormControl, FormControlLabel } from '@material-ui/core/'
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Flash from '@material-ui/icons/FlashOn';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import NavigationIcon from '@material-ui/icons/Navigation';
+import Fab from '@material-ui/core/Fab';
+
+import ListSubheader from '@material-ui/core/ListSubheader';
+
+
+
 import api from '../services/api';
 import './Present.css';
 
 import createListener from '../services/watson-listener';
 
+
+const useStyles = makeStyles(theme => ({
+    button: {
+      margin: theme.spacing(1),
+    },
+    input: {
+      display: 'none',
+    },
+    AppBar:{
+        // height: theme.spacing(6),
+        alignItems: 'center'
+    },
+    ListSubheader:{
+        alignItems: 'center'
+    },
+}))
+
 export default function Present({ match }) {
+
+    const classes = useStyles();
+    const theme = useTheme();
+
     const [ pitch, setPitch ] = useState( null );
     const [ textStream, setTextStream ] = useState( null );
     const { pitch_id } = match.params;
@@ -19,6 +51,7 @@ export default function Present({ match }) {
         }
         getPitch();
     } , [ pitch_id ]);
+
 
     function triggerAction(action) {
         let iframe_content = document.getElementById('iframe-content');
@@ -76,7 +109,79 @@ export default function Present({ match }) {
                  </iframe>
             </div>
 
+          
+
             { pitch ? (
+                <div className="pitch-description" key={ pitch._id }>
+                    <AppBar position="static" className={classes.AppBar}>
+                        <Toolbar>
+                            <Typography variant="h6" className={classes.title} >
+                                Pitch Flow
+                            </Typography>
+                        </Toolbar>
+                    </AppBar>
+                    <Divider/> 
+                    <FormGroup className='form-present'>
+                        <Button variant ="outlined"  className={classes.Button} id="btn_send_url" onClick={startPresentation}> Start Presentation</Button>
+                        
+                        <TextField
+                            disabled
+                            label="Name"
+                            defaultValue={pitch.name}
+                            className={classes.textField}
+                            margin="normal"
+                            InputProps={{
+                            readOnly: true,
+                            }}
+                            variant="outlined"
+                        />                        
+
+                        <TextField
+                            disabled
+                            label="URL"
+                            defaultValue={pitch.url}
+                            className={classes.textField}
+                            margin="normal"
+                            InputProps={{
+                            readOnly: true,
+                            }}
+                            variant="outlined"
+                        />
+
+                    </FormGroup>       
+                    <Divider/>
+                    <FormGroup>                        
+                        <List>
+                            <ListSubheader className={classes.ListSubheader} component="div" id="nested-list-subheader">
+                                <Typography variant='h6'> Triggers </Typography>
+                            </ListSubheader>
+                            
+                            { pitch.steps.map((step, i) => (
+                                <ListItem button className="step-description">
+                                    <ListItemIcon> 
+                                        <Flash/>
+                                    </ListItemIcon>
+                                    <ListItemText key={ step._id } className="step-trigger" primary={step.trigger}>
+                                    </ListItemText>
+                                </ListItem>
+                            )) }
+                        </List>                        
+                    </FormGroup>
+                </div>
+                ) : (
+                    <div className="empty-pitch">Loading...</div>
+                ) } */}
+
+
+
+
+
+
+
+
+
+
+            {/* { pitch ? (
                 <div className="pitch-description" key={ pitch._id }>
                     <div id="output"></div>
                     <button type="button" onClick={ startPresentation }>Start present</button>
@@ -103,7 +208,7 @@ export default function Present({ match }) {
                 </div>
                 ) : (
                     <div className="empty-pitch">Loading...</div>
-                ) }
+                ) } */}
         </div>
     );
 }

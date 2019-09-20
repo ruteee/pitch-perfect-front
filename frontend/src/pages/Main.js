@@ -171,7 +171,7 @@ function Main({ location: { state }}){
                 <AppBar position="static" className={classes.AppBar}>
                     <Toolbar>
                         <Typography variant="h6" className={classes.title} >
-                        Confirgurações
+                        Settings
                         </Typography>
                     </Toolbar>
                 </AppBar>
@@ -197,8 +197,8 @@ function Main({ location: { state }}){
                         />
  
                         <TextField type='text' id='gatilho' label='Gatilho'  variant='outlined'  margin="normal"  className={classes.textField} />       
-                        <Button variant ="contained" id='btn-register' className={classes.button} onClick= {update_steps} > Adicionar nova ação</Button>
-                        <Button variant="contained"  id='btn-end-register' className={classes.button} onClick={mount_pitch} > Finalizar  </Button>
+                        <Button variant ="contained" id='btn-register' className={classes.button} onClick= {update_steps} > Add new action</Button>
+                        <Button variant="contained"  id='btn-end-register' className={classes.button} onClick={mount_pitch} > End  </Button>
 
                     {/* {actionstate.length > 0 ? (
                     <div>
