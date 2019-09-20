@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import InitPitch from './pages/InitPitch.js';
 import Main from './pages/Main.js';
 import Present from './pages/Present.js';
+import Watson from './pages/Watson.js';
 
 function Routes(props){
     return(
@@ -11,6 +12,7 @@ function Routes(props){
             <Route path="/main" component = {Main}/>
             <Route path="/present" exact component = { Present }/>
             <Route path="/present/:pitch_id" exact component = { Present }/>
+            <Route path="/watson" exact component = { Watson } />
         </BrowserRouter>
     )
 }

@@ -8,7 +8,13 @@
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
-    "uuid": "^3.3.3"
+    "uuid": "^3.3.3",
+    "dotenv": "^4.0.0",
+    "ibm-watson": "latest",
+    "ioredis": "latest",
+    "line-in": "^0.1.2",
+    "mic": "^2.1.1",
+    "wav": "^1.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
