@@ -21,6 +21,7 @@
     "reactstrap": "^8.0.1",
     "typeface-roboto": "^0.0.75",
     "uuid": "^3.3.3",
+    "watson-speech": "^0.36.6",
     "wav": "^1.0.2"
   },
   "scripts": {
