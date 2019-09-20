@@ -164,7 +164,7 @@ function InitPitch({ history }){
                                     <ListItemIcon> 
                                         <DesktopMacIcon/>
                                     </ListItemIcon>
-                                    <ListItemText key={pitch.id} >
+                                    <ListItemText key={ pitch._id } onClick={ () => history.push(`present/${pitch._id}`) }>
                                         <p> Nome:  { pitch.name } </p>
                                         <p> URL: { pitch.url }</p>
                                     
