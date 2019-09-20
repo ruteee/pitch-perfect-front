@@ -1,0 +1,19 @@
+.pitch-description, .empty-pitch {
+    width:20%;
+    display: flex;
+    background-color: aqua;
+    height: 100%;
+    float: right;
+    flex-direction: column;
+    justify-content: center
+}
+
+.step-description {
+    background-color: beige;
+}
+
+.action-description {
+    background-color: blueviolet;
+    border-color: black;
+    border: 1px solid black;
+}
