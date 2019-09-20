@@ -4,6 +4,7 @@ import api from '../services/api';
 import './Present.css';
 
 import createListener from '../services/watson-listener';
+import jQuery from  'jquery';
 
 export default function Present({ match }) {
     const [ pitch, setPitch ] = useState( null );
@@ -22,7 +23,7 @@ export default function Present({ match }) {
 
     function triggerAction(action) {
         let iframe_content = document.getElementById('iframe-content');
-        let target_el = iframe_content.contentWindow.document.getElementById(action.target);
+        let target_el = iframe_content.contentWindow.document.querySelector(action.target);
         switch (action.event) {
             case 'click':
                 target_el.click();
