@@ -5,20 +5,21 @@ import './Watson.css';
 
 export default function Watson({ match }) {
     
-    var watson_hear =  speech_text();
+    // var watson_hear =  speech_text();
 
-    console.log(watson_hear);
+    // console.log(watson_hear);
 
     return (
         <div className="watson">
             <p>Olá</p>
+            <button type="button" onClick={ () => speech_text() }>CLick</button>
         </div>
     );
 
 }
 
 function speech_text() {
-    const mic = require('mic');
+    // const mic = require('mic');
     const SpeechToTextV1 = require('ibm-watson/speech-to-text/v1');
     const speechToText = new SpeechToTextV1({
     iam_apikey: 'Eqky6yJU8L-NTw0XKAmqwVpl3-wgtzRmk0q8jZ6cREgt',
@@ -27,13 +28,15 @@ function speech_text() {
     });
 
     // 1. Microphone settings
-    const micInstance = mic({
-    rate: 44100,
-    channels: 2,
-    debug: false,
-    exitOnSilence: 0
-    });
+    // const micInstance = mic({
+    // rate: 44100,
+    // channels: 2,
+    // debug: false,
+    // exitOnSilence: 6
+    // });
 
+    navigator.getUserMedia = ( navigator.getUserMedia    || navigator.webkitGetUserMedia ||
+      navigator.mozGetUserMedia ||navigator.msGetUserMedia);
 
 
     // 2. Service recognize settings
@@ -44,17 +47,32 @@ function speech_text() {
     })
 
     // 3. Start recording
-    const micInputStream = micInstance.getAudioStream();
-    micInstance.start();
+    // const micInputStream = micInstance.getAudioStream();
+    // micInstance.start();
+    var aCtx;
+    var analyser;
+    var microphone;
+    if (navigator.getUserMedia) {
+    navigator.getUserMedia({audio: true}, function(stream) {
+    aCtx = new AudioContext();
+    analyser = aCtx.createAnalyser();
+    microphone = aCtx.createMediaStreamSource(stream);
+    microphone.connect(analyser);
+    analyser.connect(aCtx.destination);
+    }, function (){console.warn("Error getting audio stream from getUserMedia")});
+    };
 
     // console.log('Watson is listening, you may speak now.');
 
     // 4. Pipe audio to service
-    const textStream = micInputStream.pipe(recognizeStream).setEncoding('utf8');
+    // const textStream = microphone.pipe(recognizeStream).setEncoding('utf8');
+    const textStream = microphone.pipe(recognizeStream).setEncoding('utf8');
+
 
     // textStream.on('data', user_speech_text => console.log('Watson hears:', user_speech_text));
     // textStream.on('error', e => console.log(`error: ${e}`));
     // textStream.on('close', e => console.log(`close: ${e}`));
+
         
     return textStream.on('data', user_speech_text => console.log('Watson hears:', user_speech_text));
   }
