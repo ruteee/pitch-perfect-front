@@ -4,13 +4,12 @@ import api from '../services/api';
 import './Present.css';
 
 import createListener from '../services/watson-listener';
-import jQuery from  'jquery';
 
 export default function Present({ match }) {
     const [ pitch, setPitch ] = useState( null );
     const [ textStream, setTextStream ] = useState( null );
     const { pitch_id } = match.params;
-    // const [ currentStep, setCurrentStep ] = useState(0);
+    
     var currentStep = 0;
 
     useEffect( () => {
@@ -42,9 +41,6 @@ export default function Present({ match }) {
     
     async function startPresentation() {
         setTextStream(await createListener());
-        // textStream.on('data', user_speech_text => processTextFromSpeech(user_speech_text.results[0].alternatives[0].transcript));
-        // textStream.on('error', e => console.log(`error: ${e}`));
-        // textStream.on('close', e => console.log(`close: ${e}`));
     }
 
     useEffect( () => {
@@ -64,11 +60,10 @@ export default function Present({ match }) {
                 for (const action of pitch.steps[currentStep].actions) {
                     triggerAction(action);
                 }
-                // setCurrentStep(10);            
                 currentStep = currentStep + 1;
             }
             
-            if (currentStep == pitch.steps.length) {
+            if ( currentStep === pitch.steps.length ) {
                 textStream.stop();
             }    
         }
