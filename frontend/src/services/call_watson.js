@@ -12,7 +12,7 @@
     rate: 44100,
     channels: 2,
     debug: false,
-    exitOnSilence: 0
+    exitOnSilence: 6
     });
 
 
