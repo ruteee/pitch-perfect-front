@@ -105,7 +105,7 @@ export default function Present({ match }) {
     return (
         <div className="pitch-presentation">
             <div className='div-iframe'>                  
-                 <iframe id="iframe-content" title = "Presentation" src="http://localhost:3000/">
+                 <iframe id="iframe-content" title = "Presentation" src={ pitch ? pitch.url : "" }>
                  </iframe>
             </div>
 
