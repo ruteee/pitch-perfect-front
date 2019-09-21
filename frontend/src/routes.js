@@ -5,6 +5,8 @@ import Main from './pages/Main.js';
 import Present from './pages/Present.js';
 import Watson from './pages/Watson.js';
 
+import TelaTeste from './pages/TelaTeste';
+
 function Routes(props){
     return(
         <BrowserRouter>
@@ -13,6 +15,7 @@ function Routes(props){
             <Route path="/present" exact component = { Present }/>
             <Route path="/present/:pitch_id" exact component = { Present }/>
             <Route path="/watson" exact component = { Watson } />
+            <Route path="/form" exact component={ TelaTeste }/>
         </BrowserRouter>
     )
 }
