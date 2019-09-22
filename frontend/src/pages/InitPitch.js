@@ -14,7 +14,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import clsx from 'clsx';
 
 /*bas stuff*/
-const drawerWidth = 240;
+const drawerWidth = 280;
 
 const useStyles = makeStyles(theme => ({
   root: {
