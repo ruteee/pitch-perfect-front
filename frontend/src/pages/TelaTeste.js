@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 // import './TelaTeste.css'
 
 import 'typeface-roboto';
 import { Button, TextField, FormGroup, FormControlLabel, FormControl, Switch, AppBar, Toolbar, Typography } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
-import jQuery from 'jquery'
 import Checkbox from '@material-ui/core/Checkbox';
 
 import InputLabel from '@material-ui/core/InputLabel';

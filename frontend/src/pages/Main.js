@@ -193,12 +193,12 @@ function Main({ location: { state }}){
                                     onChange={e=> setCapturing(!capturing) }
                                     color="primary"/>
                                 }
-                                label="Iniciar captura de ações"
+                                label="Start action capture" //"Iniciar captura de ações"
                         />
  
-                        <TextField type='text' id='gatilho' label='Gatilho'  variant='outlined'  margin="normal"  className={classes.textField} />       
-                        <Button variant ="contained" id='btn-register' className={classes.button} onClick= {update_steps} > Add new action</Button>
-                        <Button variant="contained"  id='btn-end-register' className={classes.button} onClick={mount_pitch} > End  </Button>
+                        <TextField type='text' id='gatilho' label='Trigger' variant='outlined' margin="normal" className={classes.textField} />       
+                        <Button variant="contained" id='btn-register' className={classes.button} onClick= {update_steps} >Add new action</Button>
+                        <Button variant="contained" id='btn-end-register' className={classes.button} onClick={mount_pitch} >End</Button>
 
                     {/* {actionstate.length > 0 ? (
                     <div>

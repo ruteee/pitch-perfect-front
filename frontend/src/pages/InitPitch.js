@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './InitPitch.css'
 import api from '../services/api';
 
-import {Button, TextField, FormGroup,AppBar,Toolbar, Drawer, Typography, IconButton, Divider, List, ListItemText, ListItem, FormControl } from '@material-ui/core/'
+import {Button, TextField, FormGroup,AppBar,Toolbar, Drawer, Typography, IconButton, Divider, List, ListItemText, ListItem } from '@material-ui/core/'
 import MenuIcon from '@material-ui/icons/Menu';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -189,13 +189,13 @@ function InitPitch({ history }){
             <div className="init-settings">
                 <FormGroup  className={classes.formGroup} id='form_main'>
                     <TextField id= "text_url" type='text' 
-                        label ='Digite a url da sua aplicação' 
+                        label = 'Application URL'//'Digite a url da sua aplicação' 
                         value = { webpage }  
                         onChange={ e => setWebPage(e.target.value)} 
                         variant='outlined'  
                         margin="normal"  
                         className={classes.textField}/>
-                    <Button variant ="contained"  className={classes.Button} id="btn_send_url" onClick={handleSubmit}> Set apllication</Button>
+                    <Button variant ="contained"  className={classes.Button} id="btn_send_url" onClick={handleSubmit}>Set application</Button>
                 </FormGroup>
             </div>
             
