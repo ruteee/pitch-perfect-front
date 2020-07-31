@@ -10,7 +10,7 @@
     "dotenv": "^4.0.0",
     "ibm-watson": "latest",
     "ioredis": "latest",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "line-in": "^0.1.2",
     "mic": "^2.1.1",
     "popper.js": "^1.15.0",
